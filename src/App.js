@@ -35,7 +35,9 @@ const initialState = {
     name: '',
     email: '',
     entries: 0,
-    joined: ''
+    joined: '',
+    pet: '',
+    age: ''
   }
 }
 
@@ -52,7 +54,9 @@ class App extends Component {
         name: data.name,
         email: data.email,
         entries: data.entries,
-        joined: data.joined
+        joined: data.joined,
+        age: data.age,
+        pet: data.pet
       }
     })
   }
@@ -136,7 +140,9 @@ class App extends Component {
           <Modal>
             <Profile
               isProfileOpen={isProfileOpen}
-              toggleModal={this.toggleModal} />
+              toggleModal={this.toggleModal}
+              loadUser={this.loadUser}
+              user={this.state.user} />
           </Modal>
         }
         {route === 'home'

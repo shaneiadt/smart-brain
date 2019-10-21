@@ -33,7 +33,8 @@ export default class extends React.Component {
         fetch(`http://localhost:3030/profile/${this.state.user.id}`, {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': window.sessionStorage.getItem('token')
             },
             body: JSON.stringify({
                 formInput: {
@@ -44,9 +45,10 @@ export default class extends React.Component {
             })
         })
             .then(res => {
-                console.log(res);
-                this.props.toggleModal();
-                this.props.loadUser({ ...user });
+                if (res.status === 200 || res.status === 304) {
+                    this.props.toggleModal();
+                    this.props.loadUser({ ...user });
+                }
             })
             .catch(err => console.log(err));
     }
